@@ -1,0 +1,54 @@
+{
+  "name": "Quasar Admin",
+  "version": "0.0.1",
+  "description": "Quasar Admin",
+  "productName": "Work Connect",
+  "author": "pratikpatelpp802@gmail.com",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build",
+    "staging": "quasar build --debug",
+    "prod": "quasar build --prod"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "@quasar/quasar-ui-qcalendar": "^4.0.0-beta.15",
+    "@stomp/stompjs": "^7.0.0",
+    "@vue/composition-api": "^1.7.1",
+    "@vueuse/core": "^10.7.2",
+    "axios": "^1.6.5",
+    "buffer": "^5.7.1",
+    "crypto-js": "^4.1.1",
+    "echarts": "^5.4.3",
+    "jwt-decode": "^3.1.2",
+    "leaflet": "^1.9.4",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.44",
+    "pinia": "^2.0.11",
+    "quasar": "^2.6.0",
+    "vue": "^3.0.0",
+    "vue-echarts": "^6.5.4",
+    "vue-i18n": "^9.0.0",
+    "vue-router": "^4.0.0",
+    "vuedraggable": "^2.24.3",
+    "websocket": "^1.0.34"
+  },
+  "devDependencies": {
+    "@dsb-norge/vue-keycloak-js": "^2.2.0",
+    "@intlify/vite-plugin-vue-i18n": "^3.3.1",
+    "@quasar/app-vite": "^1.0.0",
+    "@quasar/quasar-app-extension-qenv": "^1.1.0",
+    "autoprefixer": "^10.4.2",
+    "dotenv": "^16.0.3",
+    "postcss": "^8.4.14",
+    "quasar-app-extension-qhierarchy": "^1.0.9",
+    "sass": "^1.69.4"
+  },
+  "engines": {
+    "node": "^18 || ^16 || ^14.19",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}

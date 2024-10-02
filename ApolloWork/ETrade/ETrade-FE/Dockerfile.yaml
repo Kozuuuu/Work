@@ -1,0 +1,42 @@
+FROM python AS deps
+
+RUN pip install gdown
+RUN gdown https://drive.google.com/uc?id=1fqOwuOZNx3rCyAE3PMotoqkmYNzjythk
+RUN gdown https://drive.google.com/uc?id=1xHiCgKUBgGizHPLxhONGr11tv4EUz_iA
+
+FROM ubuntu:latest
+
+ENV SDKMAN_DIR="/root/.sdkman"
+ENV SDKMAN_INIT="$SDKMAN_DIR/bin/sdkman-init.sh"
+ENV _JAVA_OPTIONS="-Xmx1024m"
+ENV JAVA_OPTS="-Xmx2g -XX:MaxPermSize=1540m -Dstringchararrayaccessor.disabled=true"
+
+RUN apt-get update -y \
+    && apt-get -y install bash curl tar wget unzip zip unrar \
+    && rm /bin/sh \
+    && ln -s /bin/bash /bin/sh \
+    && curl -s "https://get.sdkman.io" | bash \
+    && bash -c "source $SDKMAN_INIT && sdk install java 7.0.352-zulu && sdk install grails 1.3.7"
+
+WORKDIR /etrade-2.0
+COPY . .
+RUN find . -name "*Zone.Identifier" -type f -delete
+
+COPY --from=deps /grails_plugins.1.3.7.tar.gz /etrade-2.0/grails_plugins.1.3.7.tar.gz
+COPY --from=deps /grails_plugins.1.3.7.rar /etrade-2.0/grails_plugins.1.3.7.rar
+
+RUN cp grails_plugins.1.3.7.rar "$HOME/.sdkman/candidates/grails/1.3.7/plugins/" \
+    && mkdir -p "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
+    && cp grails_plugins.1.3.7.tar.gz "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
+    && tar xvf "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/grails_plugins.1.3.7.tar.gz" -C "$HOME/.grails/1.3.7/projects/etrade-2.0/" \
+    && mv "$HOME/.grails/1.3.7/projects/etrade-2.0/grails_plugins.1.3.7/" "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
+    && mv "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/grails_plugins.1.3.7/"* "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
+    && mv "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/ws-client-1.0/ws-client-1.0/"* "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/ws-client-1.0/" \
+    && rm -r "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/ws-client-1.0/ws-client-1.0/" \
+    && rm /etrade-2.0/grails_plugins.1.3.7.tar.gz \
+    && rm /etrade-2.0/grails_plugins.1.3.7.rar
+
+ENV BASH_ENV="$SDKMAN_INIT"
+
+EXPOSE 8090
+CMD ["bash", "-c", "source $SDKMAN_INIT && grails -Dserver.port=8090 run-app"]

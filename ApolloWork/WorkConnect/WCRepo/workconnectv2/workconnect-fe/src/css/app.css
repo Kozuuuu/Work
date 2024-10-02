@@ -1,0 +1,160 @@
+/* app global css */
+
+.portal img {
+  max-width: 560px !important;
+  height: 100% !important;
+}
+.cpa-logo img.q-img__image.q-img__image--with-transition.q-img__image--loaded {
+  object-fit: contain !important;
+  max-height: 65px;
+}
+
+.landing button.q-btn::before {
+  box-shadow: none !important;
+}
+.breadcrumbs:hover {
+  color: #5380a9;
+}
+
+.drawerActive {
+  background: #31a25e;
+  border-radius: 5px 25px 25px 5px;
+}
+
+.cardHeader {
+  background: #bdebd0;
+  border-radius: 5px 25px 25px 5px;
+  width: fit-content;
+}
+
+.registration-form
+  .q-stepper__tab.col-grow.flex.items-center.no-wrap.relative-position {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.registration-form
+  .q-stepper__header.row.items-stretch.justify-between.q-stepper__header--alternative-labels.q-stepper__header--border {
+  height: 85px;
+}
+
+.custom-select .q-field__inner {
+  border: none !important; /* Remove the border */
+  box-shadow: none !important; /* Remove the box shadow */
+  padding-right: 0 !important; /* Remove the right padding */
+}
+
+.custom-select .q-select__control .q-field__native {
+  background-color: transparent !important; /* Make the background transparent */
+}
+
+.custom-select .q-select__control .q-select__selected {
+  display: none !important; /* Hide the arrow */
+}
+
+.custom-select .q-select__control .q-field__label {
+  padding-right: 0 !important; /* Remove the right padding for the label */
+}
+
+.custom-select
+  .q-field__append.q-field__marginal.row.no-wrap.items-center.q-anchor--skip {
+  display: none !important;
+}
+
+.custom-select.q-field--standard.q-field--readonly .q-field__control:before {
+  border-bottom-style: none !important;
+}
+
+/* .container-width {
+  max-width: 1920px;
+  margin: 0 auto;
+} */
+.q-dialog__backdrop {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+.my-sticky-virtscroll-table {
+  height: 600px;
+}
+
+.my-sticky-virtscroll-table .q-table__top,
+.my-sticky-virtscroll-table .q-table__bottom,
+.my-sticky-virtscroll-table thead tr:first-child th {
+  /* bg color is important for th; just specify one */
+  background-color: #fff;
+}
+
+.my-sticky-virtscroll-table thead tr th {
+  position: sticky;
+  z-index: 1;
+}
+
+.my-sticky-virtscroll-table thead tr:last-child th {
+  /* this will be the loading indicator */
+  /* height of all previous header rows */
+  top: 40px;
+}
+
+.my-sticky-virtscroll-table thead tr:first-child th {
+  top: 0;
+}
+
+/* prevent scrolling behind sticky top row on focus */
+.my-sticky-virtscroll-table tbody {
+  /* height of all previous header rows */
+  scroll-margin-top: 48px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+.clickable:hover {
+  background-color: whitesmoke;
+}
+.my-sticky-first-column-table thead tr:first-child th:first-child {
+  background-color: white;
+}
+
+.my-sticky-first-column-table th:first-child,
+.my-sticky-first-column-table td:first-child {
+  background-color: white;
+  border-right: 1.5px solid rgba(0, 0, 0, 0.5);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+/* .my-sticky-first-and-second-column-table
+  thead
+  tr:first-child
+  th:first-child
+  th:nth-child(2)
+  td:nth-child(2) {
+  background-color: white;
+}
+.my-sticky-first-and-second-column-table th:first-child,
+.my-sticky-first-and-second-column-table td:first-child {
+  background-color: white;
+  border-right: 1.5px solid rgba(0, 0, 0, 0.5);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.my-sticky-first-and-second-column-table th:nth-child(2),
+.my-sticky-first-and-second-column-table td:nth-child(2) {
+  background-color: white; /* Add this if necessary */
+/* border-left: 1.5px solid rgba(0, 0, 0, 0.5);
+  position: sticky;
+  left: 50px; Adjust the left position as needed 
+  z-index: 1;
+} */
+
+.gap-1 {
+  gap: 1em;
+}
+.gap-2 {
+  gap: 2em;
+}
+.fit-content {
+  width: fit-content;
+}
