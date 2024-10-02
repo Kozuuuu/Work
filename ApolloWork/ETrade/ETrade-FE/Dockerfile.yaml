@@ -12,11 +12,11 @@ ENV _JAVA_OPTIONS="-Xmx1024m"
 ENV JAVA_OPTS="-Xmx2g -XX:MaxPermSize=1540m -Dstringchararrayaccessor.disabled=true"
 
 RUN apt-get update -y \
-    && apt-get -y install bash curl tar wget unzip zip unrar \
-    && rm /bin/sh \
-    && ln -s /bin/bash /bin/sh \
-    && curl -s "https://get.sdkman.io" | bash \
-    && bash -c "source $SDKMAN_INIT && sdk install java 7.0.352-zulu && sdk install grails 1.3.7"
+&& apt-get -y install bash curl tar wget unzip zip unrar \
+&& rm /bin/sh \
+&& ln -s /bin/bash /bin/sh \
+&& curl -s "https://get.sdkman.io" | bash \
+&& bash -c "source $SDKMAN_INIT && sdk install java 7.0.352-zulu && sdk install grails 1.3.7"
 
 WORKDIR /etrade-2.0
 COPY . .
@@ -26,15 +26,19 @@ COPY --from=deps /grails_plugins.1.3.7.tar.gz /etrade-2.0/grails_plugins.1.3.7.t
 COPY --from=deps /grails_plugins.1.3.7.rar /etrade-2.0/grails_plugins.1.3.7.rar
 
 RUN cp grails_plugins.1.3.7.rar "$HOME/.sdkman/candidates/grails/1.3.7/plugins/" \
-    && mkdir -p "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
-    && cp grails_plugins.1.3.7.tar.gz "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
-    && tar xvf "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/grails_plugins.1.3.7.tar.gz" -C "$HOME/.grails/1.3.7/projects/etrade-2.0/" \
-    && mv "$HOME/.grails/1.3.7/projects/etrade-2.0/grails_plugins.1.3.7/" "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
-    && mv "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/grails_plugins.1.3.7/"* "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
-    && mv "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/ws-client-1.0/ws-client-1.0/"* "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/ws-client-1.0/" \
-    && rm -r "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/ws-client-1.0/ws-client-1.0/" \
-    && rm /etrade-2.0/grails_plugins.1.3.7.tar.gz \
-    && rm /etrade-2.0/grails_plugins.1.3.7.rar
+&& mkdir -p "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
+&& cp grails_plugins.1.3.7.tar.gz "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
+&& tar xvf "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/grails_plugins.1.3.7.tar.gz" -C "$HOME/.grails/1.3.7/projects/etrade-2.0/" \
+&& mv "$HOME/.grails/1.3.7/projects/etrade-2.0/grails_plugins.1.3.7/" "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
+&& mv "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/grails_plugins.1.3.7/"* "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/" \
+&& mv "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/ws-client-1.0/ws-client-1.0/"* "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/ws-client-1.0/" \
+&& rm -r "$HOME/.grails/1.3.7/projects/etrade-2.0/plugins/ws-client-1.0/ws-client-1.0/" \
+&& rm /etrade-2.0/grails_plugins.1.3.7.tar.gz \
+&& rm /etrade-2.0/grails_plugins.1.3.7.rar
+
+RUN source "$HOME/$SDKMAN" && grails clean \
+&& source "$HOME/$SDKMAN" && grails compile \
+&& source "$HOME/$SDKMAN" && grails test war test-etrade_$DEVNAME_.0.0.0.0.0.war
 
 ENV BASH_ENV="$SDKMAN_INIT"
 
