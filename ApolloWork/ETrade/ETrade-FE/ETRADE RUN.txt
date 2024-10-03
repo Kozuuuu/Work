@@ -1,0 +1,5 @@
+ETRADE
+
+export JAVA_OPTS="-Xmx2g -XX:MaxPermSize=2540m -Dstringchararrayaccessor.disabled=true"
+
+grails clean; grails compile; grails -Dserver.port=8084 run-app
