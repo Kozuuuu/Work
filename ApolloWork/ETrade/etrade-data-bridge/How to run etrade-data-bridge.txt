@@ -1,0 +1,28 @@
+===== HOW TO RUN etrade-data-bridge =====
+
+Pre-Requisite:
+	Java 21 - any
+	maven
+	springboot
+	Postgres
+
+1. change application properties:
+	spring.datasource.url=jdbc:postgresql://112.199.119.250:55544/peza_db
+
+2. Connect to DB using Dbeaver/PG-Admin
+	Host: 112.199.119.250
+	Port: 55544
+	DB: peza_db
+	UserName: vasp_user
+	Pass: V@5pS3cR3t
+ 
+3. Create a dir under "etrade-data-bridge\src\main\resources\" called "graphql-client"
+	---- mkdir graphql-client
+
+4. mvn clean install and mvn sprin-boot:run
+	- make sure you are in the main directory
+	- make sure you have java 21 installed used
+		---- mvn --version
+	
+5. It should be running now in:
+	http://localhost:5000/data-bridge/api/enterprises/1
