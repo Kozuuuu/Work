@@ -1,0 +1,271 @@
+HOW TO RUN ETRADE_BE4
+
+1. In ubunutu linunx
+
+2. Make sure its up to date
+ 	- sudo apt-get update
+	- sudo apt-get upgrade
+
+3. Install latest Zulu java 7
+	- sudo apt update
+	- sudo apt install zulu7-jdk
+	
+		# Verify the installation
+			-> java -version
+
+4. Install tomcat7
+	- cd /tmp/
+	- curl -O https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.70/bin/apache-tomcat-7.0.70.tar.gz
+		
+		#check if file is successfully saved
+			-> ll apache-tomcat-7.0.70.tar.gz
+
+	4.1 Create tomcat dir
+		- mkdir /var/lib/tomcat7/
+
+	4.2. extract the downloaded files
+		- tar xzvf apache-tomcat-7.0.70.tar.gz -C /var/lib/tomcat7 --strip-components=1
+
+			#Check if the files are extracted to tomcat folder
+				- cd /var/lib/tomcat7
+				- ls -l
+
+	4.3. Create a tomcat user and group
+		- groupdadd tomcat7
+
+	4.4. create user
+		- useradd -s /bin/false -g tomcat7 -d /var/lib/tomcat7 tomcat7
+	
+	4.5. go to tomcat dir
+		- cd /var/lib/tomcat7/
+
+	4.6. CP the following in terminal to change group ownership
+		- chgrp -R tomcat7 conf
+		- chmod g+rwx conf
+		- chmod g+r conf/*
+		- chown -R tomcat7 work/ temp/ logs/
+
+#Check java path
+	- readlink -f $(which java)
+	or
+	- which java
+
+5.  Create a system service file
+	5.1. Edit/Create tomcat.service
+		- nano /etc/systemd/system/tomcat7.service
+
+	5.2 Paste the following Configurations in tomcat.service
+		[Unit]
+		Description=Apache Tomcat Web Application Container
+		After=network.target
+
+		[Service]
+		Type=forking
+
+		Environment=JAVA_HOME=<from-the-output-(readlink -f $(which java)>
+		Environment=CATALINA_PID=/var/lib/tomcat7/temp/tomcat.pid
+		Environment=CATALINA_HOME=/var/lib/tomcat7
+		Environment=CATALINA_BASE=/var/lib/tomcat7
+		Environment='CATALINA_OPTS=-Xmx25600M -Xms20480M -XX:PermSize=512m -XX:MaxPermSize=512m -XX:NewSize=256m -server -XX:+UseParallelGC'
+
+
+		ExecStart=/var/lib/tomcat7/bin/startup.sh
+		ExecStop=/var/lib/tomcat7/bin/shutdown.sh
+
+		User=tomcat7
+		Group=tomcat7
+		UMask=0007
+		RestartSec=10
+		Restart=always
+
+		WorkingDirectory=/var/lib/tomcat7
+
+		[Install]
+		WantedBy=multi-user.target
+
+	5.3  Reload the systemd daemon so that it picks up your new tomcat.service
+	
+		- sudo systemctl daemon-reload
+
+6. Create a stacktrace.log file
+	- touch /var/lib/tomcat7stacktrace.log
+	- chown -R tomcat7:tomcat7 /var/lib/tomcat7/stacktrace.log
+
+7. Install Apache2
+	- sudo apt-get install apache2
+
+8. Install Unzip
+	- sudo apt-get install Unzip
+
+9. Create important directories and change ownership and permissions
+	sudo mkdir /var/lib/tomcat7/acos_incoming_dir /var/lib/tomcat7/acos_outgoing_dir /var/lib/tomcat7/acos_unl_dir /var/lib/tomcat7/ccbi_outgoing_dir /var/lib/tomcat7/disabled_jobs_dir /var/lib/tomcat7/e2m_af_incoming_dir /var/lib/tomcat7/e2m_al_incoming_dir /var/lib/tomcat7/e2m_incoming_dir /var/lib/tomcat7/e2m_manifest_incoming_dir /var/lib/tomcat7/e2m_olrs_incoming_dir /var/lib/tomcat7/e2m_sf_incoming_dir /var/lib/tomcat7/e2m_sl_incoming_dir /var/lib/tomcat7/e2m_unl_dir /var/lib/tomcat7/e2m_uploaded_dir /var/lib/tomcat7/eips_incoming_dir /var/lib/tomcat7/eips_outgoing_dir /var/lib/tomcat7/email_xml_incoming_dir /var/lib/tomcat7/fedex_uploaded /var/lib/tomcat7/ftpscript /var/lib/tomcat7/gofast_sl /var/lib/tomcat7/manifest_port_outgoing_dir /var/lib/tomcat7/Q2 /var/lib/tomcat7/response_report_outgoing_dir /var/lib/tomcat7/seed /var/lib/tomcat7/temp_errorFolder /var/lib/tomcat7/tempFolder /var/lib/tomcat7/war_for_deployment /var/lib/tomcat7/ftp_in /var/lib/tomcat7/ftp_in/aspac /var/lib/tomcat7/ftp_in/cathaypac /var/lib/tomcat7/ftp_in/thaiair /var/lib/tomcat7/ftp_in/yusena /var/lib/tomcat7/acop_tp /var/lib/tomcat7/aspac_uploaded /var/lib/tomcat7/cbw_outgoing_dir /var/lib/tomcat7/cdc_incoming_dir /var/lib/tomcat7/cdc_outgoing_dir /var/lib/tomcat7/cts_outgoing_dir /var/lib/tomcat7/cts_temp_dir /var/lib/tomcat7/cts_temp_outgoing_dir /var/lib/tomcat7/e2m_abms_ledger_incoming_dir /var/lib/tomcat7/e2m_callback_incoming_dir /var/lib/tomcat7/e2m_outgoing_dir /var/lib/tomcat7/egdvs_incoming_dir /var/lib/tomcat7/eips_uploaded_dir /var/lib/tomcat7/manifest_port5j_outgoing_dir /var/lib/tomcat7/scripts /var/lib/tomcat7/temp_af_incoming /var/lib/tomcat7/temp_al_incoming /var/lib/tomcat7/temp_errorFolder_tnt /var/lib/tomcat7/temp_incoming /var/lib/tomcat7/temp_reprocess /var/lib/tomcat7/tempResponse /var/lib/tomcat7/cts_sf_incoming_dir /var/lib/tomcat7/cts_sl_incoming_dir /var/lib/tomcat7/e2m_abms_temp_incoming /var/lib/tomcat7/etrade_incoming_dir /var/lib/tomcat7/etrade_outgoing_dir /var/lib/tomcat7/etrade_uploaded_dir /var/lib/tomcat7/peza_ed_outgoing_dir /var/lib/tomcat7/peza_ed_uploaded_dir /var/lib/tomcat7/peza_outgoing_dir /var/lib/tomcat7/peza_uploaded_dir
+
+	chown -R tomcat7: /var/lib/tomcat7/acos_incoming_dir /var/lib/tomcat7/acos_outgoing_dir /var/lib/tomcat7/acos_unl_dir /var/lib/tomcat7/ccbi_outgoing_dir /var/lib/tomcat7/disabled_jobs_dir /var/lib/tomcat7/e2m_af_incoming_dir /var/lib/tomcat7/e2m_al_incoming_dir /var/lib/tomcat7/e2m_incoming_dir /var/lib/tomcat7/e2m_manifest_incoming_dir /var/lib/tomcat7/e2m_olrs_incoming_dir /var/lib/tomcat7/e2m_sf_incoming_dir /var/lib/tomcat7/e2m_sl_incoming_dir /var/lib/tomcat7/e2m_unl_dir /var/lib/tomcat7/e2m_uploaded_dir /var/lib/tomcat7/eips_incoming_dir /var/lib/tomcat7/eips_outgoing_dir /var/lib/tomcat7/email_xml_incoming_dir /var/lib/tomcat7/fedex_uploaded /var/lib/tomcat7/ftpscript /var/lib/tomcat7/gofast_sl /var/lib/tomcat7/manifest_port_outgoing_dir /var/lib/tomcat7/Q2 /var/lib/tomcat7/response_report_outgoing_dir /var/lib/tomcat7/seed /var/lib/tomcat7/temp_errorFolder /var/lib/tomcat7/tempFolder /var/lib/tomcat7/war_for_deployment /var/lib/tomcat7/ftp_in /var/lib/tomcat7/ftp_in/aspac /var/lib/tomcat7/ftp_in/cathaypac /var/lib/tomcat7/ftp_in/thaiair /var/lib/tomcat7/ftp_in/yusena /var/lib/tomcat7/acop_tp /var/lib/tomcat7/aspac_uploaded /var/lib/tomcat7/cbw_outgoing_dir /var/lib/tomcat7/cdc_incoming_dir /var/lib/tomcat7/cdc_outgoing_dir /var/lib/tomcat7/cts_outgoing_dir /var/lib/tomcat7/cts_temp_dir /var/lib/tomcat7/cts_temp_outgoing_dir /var/lib/tomcat7/e2m_abms_ledger_incoming_dir /var/lib/tomcat7/e2m_callback_incoming_dir /var/lib/tomcat7/e2m_outgoing_dir /var/lib/tomcat7/egdvs_incoming_dir /var/lib/tomcat7/eips_uploaded_dir /var/lib/tomcat7/manifest_port5j_outgoing_dir /var/lib/tomcat7/scripts /var/lib/tomcat7/temp_af_incoming /var/lib/tomcat7/temp_al_incoming /var/lib/tomcat7/temp_errorFolder_tnt /var/lib/tomcat7/temp_incoming /var/lib/tomcat7/temp_reprocess /var/lib/tomcat7/tempResponse /var/lib/tomcat7/cts_sf_incoming_dir /var/lib/tomcat7/cts_sl_incoming_dir /var/lib/tomcat7/e2m_abms_temp_incoming /var/lib/tomcat7/etrade_incoming_dir /var/lib/tomcat7/etrade_outgoing_dir /var/lib/tomcat7/etrade_uploaded_dir /var/lib/tomcat7/peza_ed_outgoing_dir /var/lib/tomcat7/peza_ed_uploaded_dir /var/lib/tomcat7/peza_outgoing_dir /var/lib/tomcat7/peza_uploaded_dir
+
+	chmod -R 755 /var/lib/tomcat7/acos_incoming_dir /var/lib/tomcat7/acos_outgoing_dir /var/lib/tomcat7/acos_unl_dir /var/lib/tomcat7/ccbi_outgoing_dir /var/lib/tomcat7/e2m_af_incoming_dir /var/lib/tomcat7/e2m_al_incoming_dir /var/lib/tomcat7/e2m_incoming_dir /var/lib/tomcat7/e2m_manifest_incoming_dir /var/lib/tomcat7/e2m_olrs_incoming_dir /var/lib/tomcat7/e2m_sf_incoming_dir /var/lib/tomcat7/e2m_sl_incoming_dir /var/lib/tomcat7/e2m_unl_dir /var/lib/tomcat7/e2m_uploaded_dir /var/lib/tomcat7/eips_incoming_dir /var/lib/tomcat7/eips_outgoing_dir /var/lib/tomcat7/email_xml_incoming_dir /var/lib/tomcat7/gofast_sl /var/lib/tomcat7/manifest_port_outgoing_dir /var/lib/tomcat7/response_report_outgoing_dir /var/lib/tomcat7/seed /var/lib/tomcat7/acop_tp /var/lib/tomcat7/aspac_uploaded /var/lib/tomcat7/cbw_outgoing_dir /var/lib/tomcat7/cdc_incoming_dir /var/lib/tomcat7/cdc_outgoing_dir /var/lib/tomcat7/cts_outgoing_dir /var/lib/tomcat7/cts_temp_dir 
+	/var/lib/tomcat7/cts_temp_outgoing_dir /var/lib/tomcat7/e2m_callback_incoming_dir /var/lib/tomcat7/e2m_outgoing_dir /var/lib/tomcat7/egdvs_incoming_dir /var/lib/tomcat7/eips_uploaded_dir /var/lib/tomcat7/manifest_port5j_outgoing_dir /var/lib/tomcat7/scripts /var/lib/tomcat7/temp_af_incoming /var/lib/tomcat7/temp_al_incoming /var/lib/tomcat7/temp_errorFolder_tnt /var/lib/tomcat7/temp_incoming /var/lib/tomcat7/temp_reprocess /var/lib/tomcat7/tempResponse /var/lib/tomcat7/cts_sf_incoming_dir /var/lib/tomcat7/cts_sl_incoming_dir /var/lib/tomcat7/e2m_abms_temp_incoming /var/lib/tomcat7/peza_outgoing_dir /var/lib/tomcat7/peza_uploaded_dir
+
+	chmod -R 777 /var/lib/tomcat7/disabled_jobs_dir /var/lib/tomcat7/fedex_uploaded /var/lib/tomcat7/ftpscript /var/lib/tomcat7/Q2 /var/lib/tomcat7/temp_errorFolder /var/lib/tomcat7/tempFolder /var/lib/tomcat7/war_for_deployment /var/lib/tomcat7/ftp_in /var/lib/tomcat7/ftp_in/aspac /var/lib/tomcat7/ftp_in/cathaypac /var/lib/tomcat7/ftp_in/thaiair /var/lib/tomcat7/ftp_in/yusena /var/lib/tomcat7/e2m_abms_ledger_incoming_dir /var/lib/tomcat7/etrade_incoming_dir /var/lib/tomcat7/etrade_outgoing_dir /var/lib/tomcat7/etrade_uploaded_dir /var/lib/tomcat7/peza_ed_outgoing_dir /var/lib/tomcat7/peza_ed_uploaded_dir
+
+	touch /var/lib/tomcat7/disabled_jobs_dir/AbmsLedgerProcessing.disableNOT
+	touch /var/lib/tomcat7/disabled_jobs_dir/AcosResponseProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/AcosUnlProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/AirlineManifestResponseProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/AirManifestAutoSending.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/AirManifestResponseProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/AirManifestSchedulerProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/AutomatedCusdecProccessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/CallbackProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/CCBICusdecForwarding.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/CloudProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/CountTransaction.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/CprsProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/E2mResponseProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/E2mUnlProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/EgdvsProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/EipsProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/EmailXmlProcessing.disableNOT
+	touch /var/lib/tomcat7/disabled_jobs_dir/InformalEntryProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/ManifestResponseProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/OlrsProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/PezaStatusUpdateProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/SeaManifestResponseProcessing.disableNOT
+	touch /var/lib/tomcat7/disabled_jobs_dir/SftpProcessing.disable
+	touch /var/lib/tomcat7/disabled_jobs_dir/ShippinglineManifestResponseProcessing.disableNOT
+
+	chmod -R 744 /var/lib/tomcat7/disabled_jobs_dir
+	chown -R tomcat7: /var/lib/tomcat7/disabled_jobs_dir
+
+	mkdir /var/tmp/e2m /var/tmp/e2m/bol /var/tmp/e2m/cusdec /var/tmp/e2m/manifest /var/tmp/e2m/olrs /var/tmp/e2m/transit_permit
+	chown -R tomcat7: /var/tmp/e2m /var/tmp/e2m/bol /var/tmp/e2m/cusdec /var/tmp/e2m/manifest /var/tmp/e2m/olrs /var/tmp/e2m/transit_permit
+	chmod -R 755 /var/tmp/e2m /var/tmp/e2m/bol /var/tmp/e2m/cusdec /var/tmp/e2m/manifest /var/tmp/e2m/olrs /var/tmp/e2m/transit_permit
+
+10. Transfer important files from local copy to the new BE_4 dir
+		scp root@192.168.43.174:/var/lib/tomcat7/war_for_deployment/* /var/lib/tomcat7/war_for_deployment
+		scp root@192.168.43.174:/var/lib/tomcat7/ftpscript/*.sh /var/lib/tomcat7/ftpscript/
+		scp root@192.168.43.174:/var/lib/tomcat7/scripts/*.sh /var/lib/tomcat7/scripts/
+		scp root@192.168.43.174:/var/lib/tomcat7/ftpscript/xml.keystore /var/lib/tomcat7/ftpscript/
+		scp root@192.168.43.174:/var/www/html/dtd/* /var/www/html/dtd/
+
+	10.1  Edit /etc/hosts
+		- sudo nano /etc/hosts
+
+	10.2 Add this content:
+		192.168.43.174   strategyobject.com
+
+		#PENTAHO DB
+		192.168.19.51   etrade2db
+		192.168.19.51 elinkdb
+		20.205.243.166 github.com
+
+		#SANDBOX DB
+		# 192.168.19.31 etrade2db
+		# 192.168.19.31 elinkdb
+
+		# 192.168.8.243   test.elink.ph
+
+		# 202.60.9.80 test.etrade.peza
+		# 202.60.10.115 test.etrade.peza
+		202.60.10.115   test.etrade.peza
+		# 192.168.43.174 test.etrade.peza
+		202.60.9.80 	test.etrade.net.ph
+
+
+		# 202.60.10.115   test.etrade.peza
+		202.60.10.115   testpeza.etrade.net.ph
+		# 202.60.10.115  uat-etradepeza.cdec.com.ph
+
+		# 192.168.8.243  test.etrade.peza
+		# 192.168.17.207 testpeza.etrade.net.ph
+
+
+		# 192.168.17.175  prepaid01
+		192.168.19.164	prepaid01
+		192.168.19.163   walleturl
+		# 202.60.10.132  walleturl
+		202.60.12.123   keycloak-dev.apolloglobal.net
+
+		127.0.0.1   	mail.smtp.auth
+
+	10.3 And save by CTRL + X and Y
+
+	
+11. Setup maintenance user and folders for weekly maintenance
+	- adduser backupuser
+
+	11. 1 create the scripts in /srv/maintenance for automatic file compressions
+		- mkdir /srv/maintenance
+	
+	11.2 copy the scripts from the current BE4
+		- scp root@192.168.43.174:/srv/maintenance/* /srv/maintenance/
+
+	11.3 Edit crontab
+		- crontab -e
+
+	11.4 Add the following content
+		5 0 * * * /srv/maintenance/archivebee.sh
+		5 1 * * * /srv/maintenance/copy_logs_xmlServer.sh
+		5 2 * * * /srv/maintenance/move_logs_and_responses.sh
+		* * * * * /var/lib/tomcat7/scripts/backend4_incoming_request.sh
+		* * * * * /var/lib/tomcat7/scripts/backend_tomcat4_request.sh
+		* * * * * /var/lib/tomcat7/scripts/upload_to_tosser4_request.sh
+		* * * * * /var/lib/tomcat7/scripts/transfer_to_gofast_for_be4_request.sh
+		* * * * * /var/lib/tomcat7/scripts/fedex_inbox_transfer_for_be4_request.sh
+		* * * * * /var/lib/tomcat7/scripts/manifest_transfer_for_be4_request.sh
+		* * * * * /var/lib/tomcat7/scripts/download_from_tosser_for_be4_request.sh
+		* * * * * /var/lib/tomcat7/scripts/upload_to_cts_ams_for_be4_request.sh
+		5 3 * * * /srv/maintenance/cdec_sl_copy.sh
+
+	11.5 create other dir under /home/backupuser/
+		sudo mkdir /home/backupuser/e2m_uploaded /home/backupuser/eips_processed /home/backupuser/fedex_uploaded /home/backupuser/ftp_logs /home/backupuser/ftp_uploaded /home/backupuser/eips_uploaded /home/backupuser/responses /home/backupuser/tomcat_logs
+
+		chown -R backupuser: /home/backupuser/e2m_uploaded /home/backupuser/eips_processed /home/backupuser/fedex_uploaded /home/backupuser/ftp_logs /home/backupuser/ftp_uploaded /home/backupuser/eips_uploaded /home/backupuser/responses /home/backupuser/tomcat_logs
+
+		chmod -R 755 /home/backupuser/e2m_uploaded /home/backupuser/eips_processed /home/backupuser/fedex_uploaded /home/backupuser/ftp_logs /home/backupuser/ftp_uploaded /home/backupuser/eips_uploaded /home/backupuser/responses /home/backupuser/tomcat_logs
+
+	11.6 Add ssh key
+		sudo cd /home/backupuser
+
+		mkdir /home/backupuser/.ssh
+
+	11.7 Create file authorized_keys in /home/backupuser
+
+		cd /home/backupuser/.ssh
+		touch /home/backupuser/.ssh/authorized_keys
+		
+	11.8 Edit authorized_keys
+		nano authorized_keys
+
+12. Run screen scripts -> make sure that all the scripts are copied in the /var/lib/tomcat7/ftpscript directory
+		cd /var/lib/tomcat7/ftpscript
+
+	12.1 And run:
+		sudo screen -dmS upload_to_tosser4 ./upload_to_tosser_agent.sh
+		sudo screen -dmS transfer_to_gofast_for_be4 ./transfer_to_gofast_agent.sh
+		sudo screen -dmS download_from_tosser_for_be4 ./download_from_tosser_for_be4_agent.sh
+		sudo screen -dmS fedex_inbox_transfer_for_be4 ./fedex_inbox_transfer_agent.sh
+		sudo screen -dmS manifest_transfer_for_be4 ./manifest_transfer_agent.sh
+		sudo screen -dmS upload_to_cts_ams_for_be4 ./upload_to_cts_ams_agent.sh
+
+
+13. Setup correct date and time
+		sudo timedatectl set-timezone Asia/Manila
+
+14. Unzip the current war and start tomcat7
+	14.1 Stop tomcat7 servvice
+		systemctl stop tomcat7
+	
+	14.2 Deploy the current war file:
+		unzip /var/lib/tomcat7/war_for_deployment/test.etrade.be4.0.0.0.2.war -d /var/lib/tomcat7/webapps/etrade-2.0/ && rm /var/lib/tomcat7/webapps/etrade-2.0/WEB-INF/lib/commons-codec-1.3.jar
+
+15. Start tomcat7 service:
+	service tomcat7 start
+	
+16. run / Check logs for ERROR / run
+	16.1 look for keyword ERROR
+		less /var/lib/tomcat7/logs/catalina.out
+
+	16.2 look for keyword ERROR
+		less /var/lib/tomcat7/logs/etrade2.log
+
+
