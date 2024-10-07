@@ -235,6 +235,7 @@ HOW TO RUN ETRADE_BE4
 		
 	11.8 Edit authorized_keys
 		nano authorized_keys
+		"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHY6TxU4BZUSUgYPzURUBnDejTtmcpQjPPgzZEQ98pjUXOvOYFu/fs9NJwDDPOG1iy9aauUhUn1sYT1ltQp1M8EyKa1dMsMS54WXGRW7vtOsuWFxJpdacEC6uF3Yn+KJre2nnYEyRi5tEJVBlZs1CGXCPBthT2/qOmOULnsLCWPNkhsAiHcrQlo14+yddJhcpbINLVSYfkMZNrEa0JcF3RDBa+vB0J181/pVHMvI3ep9/auETyncAUjP3TOM/v8I1wja098bDyF/LhF78J1UTaQSgIy1ysT8Bdef/9nsUOobCEU6kVT8QziLxcMu/Gq0s6vHAJfWsOkfhiNCAr348t root@etrade-fileserver.local"
 
 12. Run screen scripts -> make sure that all the scripts are copied in the /var/lib/tomcat7/ftpscript directory
 		cd /var/lib/tomcat7/ftpscript
