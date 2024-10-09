@@ -24,5 +24,11 @@ Pre-Requisite:
 	- make sure you have java 21 installed used
 		---- mvn --version
 	
-5. It should be running now in:
+5. Now try clean install, make sure you are in the working directory
+	---- mvn clean install
+
+6. Now run it using this command:
+	---- mvn spring-boot:run
+
+7. It should be running now in:
 	http://localhost:5000/data-bridge/api/enterprises/1
