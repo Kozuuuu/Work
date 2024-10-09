@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  etrade:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: etrade2.app
+    restart: always
+    ports:
+      - "8888:8090"
+    expose:
+      - "8888"
+    depends_on:
+      - etrade-db
+    environment:
+      - SDKMAN_DIR=/root/.sdkman
+      - SDKMAN_INIT=/root/.sdkman/bin/sdkman-init.sh
+      - _JAVA_OPTIONS=-Xmx1024m
+      - JAVA_OPTS=-Xmx2g -XX:MaxPermSize=1540m -Dstringchararrayaccessor.disabled=true
+
+  etrade-db:
+    image: mysql:5.7
+    container_name: etrade-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: etrade2live
+      MYSQL_USER: etrade2live
+      MYSQL_PASSWORD: 3v1123d@r73
+    ports:
+      - "3326:3306"
+    expose:
+      - "3326"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+
+volumes:
+  db_data:
