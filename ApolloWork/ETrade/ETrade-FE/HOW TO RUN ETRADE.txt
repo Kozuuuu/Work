@@ -37,6 +37,11 @@ HOW TO RUN ETRADE
 
 	grails clean; grails compile; grails -Dserver.port=8084 run-app
 
+11. It should now be running in:
+	http://localhost:8084/etrade-2.0
+
+	username: cdec_laarni
+	password: Passw0rd
 
 
 

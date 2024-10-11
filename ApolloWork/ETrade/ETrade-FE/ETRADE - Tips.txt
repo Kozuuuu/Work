@@ -1,0 +1,21 @@
+ETRADE RUN:
+------------------------------------------------------------------------------------------------
+export JAVA_OPTS="-Xmx2g -XX:MaxPermSize=2540m -Dstringchararrayaccessor.disabled=true"
+grails clean; grails compile; grails -Dserver.port=8084 run-app
+
+
+PORT:
+------------------------------------------------------------------------------------------------
+http://192.168.43.119:8080/etrade-2.0/login/full				-> dev Etrade frontend (test)
+http://192.168.43.87:8080/etrade-2.0/login/full					-> Test POPS
+http://localhost:8084/etrade-2.0/login/full					-> local
+
+
+
+CREDENTIALS:
+------------------------------------------------------------------------------------------------
+	cedc_laarni			-> Admin
+	Passw0rd
+
+	cdec_kayla			-> Admin
+	Passw0rd
