@@ -1,21 +1,52 @@
-ETRADE RUN:
+ETRADE RUN COMMAND:
 ------------------------------------------------------------------------------------------------
 export JAVA_OPTS="-Xmx2g -XX:MaxPermSize=2540m -Dstringchararrayaccessor.disabled=true"
 grails clean; grails compile; grails -Dserver.port=8084 run-app
 
 
-PORT:
+
+PORTS:
 ------------------------------------------------------------------------------------------------
 http://192.168.43.119:8080/etrade-2.0/login/full				-> dev Etrade frontend (test)
 http://192.168.43.87:8080/etrade-2.0/login/full					-> Test POPS
-http://localhost:8084/etrade-2.0/login/full					-> local
+
+http://localhost:8084/etrade-2.0/login/full					-> eTrade = LOCAL
+
+http://192.168.43.75:8080/eips							-> PEZA (test)
+
+http://localhost:5000/data-bridge/api/permit/payment				-> DataBridge (microsevice for eTrade) = LOCAL
 
 
 
-CREDENTIALS:
+CREDENTIALS -> ETRADE
 ------------------------------------------------------------------------------------------------
-	cedc_laarni			-> Admin
+	cedc_laarni			-> Admin		
 	Passw0rd
 
-	cdec_kayla			-> Admin
+	cdec_kayla			-> Admin	
 	Passw0rd
+
+	epson				-> Client
+	Passw0rd
+
+	CEXCDEC				-> ?
+	Passw0rd
+
+
+DataBase Connection:
+------------------------------------------------------------------------------------------------
+
+
+	username = "etrade2live"
+	password = "3v1123d@r73"
+
+
+
+
+CREDENTIALS -> PEZA
+------------------------------------------------------------------------------------------------
+	fdsarmienta			-> Admin
+	ap0ll0
+
+	jmanas				-> Admin
+	ap0ll0
