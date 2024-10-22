@@ -1,0 +1,36 @@
+As an: eTrade System
+
+I should be able to:
+
+Modify the ruling for the Sea Manifest wherein:
+
+	✓ The user will be allowed to add HBL in the air manifest even if the registry number is blank (The rest of the mandatory fields must be filled up except for the Registry Number);
+
+	✓ The user will be allowed to save and add HBL even if the registry number is blank (The rest of the mandatory fields must be filled up except for the Registry Number);
+	
+	✓ The user will be allowed to save and add Container details even if the registry number is blank (The rest of the mandatory fields must be filled up except for the Registry Number);
+
+	✓ The user will be allowed to send the sea manifest even if the registry number is blank (The rest of the mandatory fields must be filled up except for the Registry Number);
+
+	✓ The user can edit/update the sea manifest, sea manifest item, and [container details] even if the registry number is blank.
+
+So that:
+
+	The clients can create, edit/update, and even submit it even if the Registry Number has not yet been filled out.
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+sea manifest now accepts registryNo as Null
+	can now create/edit/save sea manifest even without registryNo
+	can now add/save HBL to sae manifest even without registryNo
+	can now add/edit/save container to the HBL even if the manifest doesnt have registryNo
+	can also send Sea Manifest without registryNo
+	changed naming of generated XML to '' if registryNo is null
+		ex. if null: 
+			P03-SF--3333338-20241021115141.xml 			
+		ex. if not null:
+			P03-SF-SXA1401-00-3333338~20241021115141.xml 	

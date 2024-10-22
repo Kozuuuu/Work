@@ -1,0 +1,43 @@
+As an: eTrade System
+
+I should be able to:
+
+Modify the ruling for the Air Manifest wherein:
+
+	✓ The user will be allowed to add AWB in the air manifest even if the registry number is blank (The rest of the mandatory fields must be filled up except for the Registry Number);
+	
+	✓ The user will be allowed to save and add AWB even if the registry number is blank (The rest of the mandatory fields must be filled up except for the Registry Number);
+	
+	✓ The user will be allowed to send the air manifest even if the registry number is blank (The rest of the mandatory fields must be filled up except for the Registry Number);
+	
+	✓ The user can edit/update air manifest and air manifest item details even if the registry number is blank.
+
+So that:
+
+The clients can create, edit/update, and even submit it even if the Registry Number has not yet been filled out.
+
+
+
+------------------------------------------------------------------------------------------------------------------
+air manifest will now accept registryNo as null
+
+	can now create/edit/save air manifest even without registryNo
+	can now add AWB to air manifest without registryNo
+	can also send Air Manifest without registryNo
+	changed naming of generated XML to '' if registryNo is null
+		ex. if null:
+			P03-AF--3333338-20241021115141.xml
+		ex. if not null:
+			P03-AF-FXA1401-00-3333338-20241021115141.xml
+
+
+
+Check:
+        modified:   grails-app/conf/QuartzConfig.groovy
+        modified:   grails-app/services/com/apollo/etrade/AirManifestService.groovy
+        modified:   grails-app/views/airManifest/create.gsp
+        modified:   grails-app/views/airManifest/edit.gsp
+        modified:   grails-app/views/airManifest/list.gsp
+        modified:   grails-app/views/airManifest/schedule.gsp
+        modified:   grails-app/views/airManifest/show.gsp
+

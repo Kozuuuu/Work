@@ -1,0 +1,11 @@
+As the: eTrade System
+
+I should be able to:
+
+	✓ Include the Arrival Date field in the Air Manifest, this will be available during create, edit/update, and show.
+
+	✓ Arrival Date will be an optional field and uses a date picker.
+
+So that:
+
+	The Arrival Date will be included as one of the parameters when searching for the Registry Number of a particular Air Manifest.

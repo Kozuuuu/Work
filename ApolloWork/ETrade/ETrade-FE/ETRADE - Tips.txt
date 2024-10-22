@@ -33,15 +33,6 @@ CREDENTIALS -> ETRADE
 	Passw0rd
 
 
-DataBase Connection:
-------------------------------------------------------------------------------------------------
-
-
-	username = "etrade2live"
-	password = "3v1123d@r73"
-
-
-
 
 CREDENTIALS -> PEZA
 ------------------------------------------------------------------------------------------------
@@ -50,3 +41,51 @@ CREDENTIALS -> PEZA
 
 	jmanas				-> Admin
 	ap0ll0
+
+
+
+DataBase Connection:
+------------------------------------------------------------------------------------------------
+
+	PTOPS:
+	username = "etrade2live"
+	password = "3v1123d@r73"
+
+
+HOW TO OPEN ETRADE TEST ENVIRONMENT:
+-----------------------------------------------------------------------------------------------
+	ssh ubuntu@192.168.43.87
+	sudo su
+	tail -f /var/lib/tomcat7/logs/etrade2.log
+
+
+SITUTATIONALS:
+------------------------------------------------------------------------------------------------
+If you cant print the Permits and will just redirect you to the main dashboard:
+	1. Open Ubuntu
+
+	2. Type this commands:
+		---- sudo apt-get install fontconfig
+		---- sudo apt-get install libXtst.so.6
+		---- sudo apt-get install libxrender1
+		---- sudo apt-get install libxtst6
+		---- sudo apt-get install libxi6
+
+	3. Run the Porject eTrade and logout/login again
+
+
+
+If you encounter an error similar to this: wallet url
+	1. Open Ubuntu
+
+	2. Type this in terminal
+		---- sudo nano /etc/hosts
+
+	3. Add this:
+		192.168.19.163  walleturl
+
+	4. Save and Double check if properly added
+
+	5. Run the Porject eTrade and logout/login again
+
+

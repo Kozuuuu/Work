@@ -1,0 +1,20 @@
+As the: eTrade System
+
+I should be able to:
+
+	✓✓ Allow the user to CREATE/DRAFT a draft GTSB application even if there is an existing GTSB with ACCEPTED status.
+
+	✓✓ Allow the user to add the e-LOA even if the e-LOA is included in the current ACCEPTED GTSB.
+
+	✓✓ The system should not allow the user to APPLY another GTSB if there is an active or ACCEPTED GTSB.					
+
+	✓✓ Transfer the validation "Only 1 ACCEPTED GTSB is allowed per user" upon application of the GTSB.
+
+	✓✓ Another validation should be made to validate that only APPROVED e-LOA can be added and applied in the GTSB.					-> to be checked		
+
+	✓✓ Only the ACCEPTED GTSB should be populated in the Transfer Permit. Those draft/for application GTSBs should not be used in the Transfer Permit transaction.
+
+So that:	
+
+The locators can create a draft GTSB in preparation for the expiring GTSB.
+==================================================================================================================================================================================================
