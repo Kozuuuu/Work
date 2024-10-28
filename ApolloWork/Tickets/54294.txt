@@ -1,0 +1,22 @@
+[PMTLAI] - US54294 - Tag as Final				
+====================================================================================================================================================
+eTrade - PMTLAI - Tag as Final - 54294
+
+
+kozuu@LAPTOP-7EUI03CP:~/apollo-work/etrade/cdec-etrade-fe/etrade-2.0$
+----------------------------------------------------------------------------------------------------------------------------------------------------
+As the: eTrade System
+
+I should be able to:
+
+	✓ Create a role for the tagging of Sea Manifest or Air Manifest transactions as Final
+	
+		The following rules will apply to the clients with the said role:
+	
+			✓ The user can tag the Sea Manifest or Air Manifest Transaction as final by clicking the Final button.
+	
+			✓ The tag as Final button will appear once the item details are complete and even if the Registry Number is not filled up.
+	
+So that:
+
+	The system will be able to determine that the transaction can proceed to the next process, which is the auto-assignment of the Registry Number

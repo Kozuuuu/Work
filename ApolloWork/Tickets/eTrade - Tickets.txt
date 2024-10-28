@@ -3,18 +3,25 @@ eTrade - TICKETS
 eTrade - POPS - Fetching of UOMs from PTOPS DB - 54128							-> [POPS] - US54128 - Fetching of UOMs from PTOPS DB
 eTrade - GTSB - Additional GTSB Rulings - 54144								-> [GTSB] - US54144 - Additional GTSB Rulings
 eTrade - PMTLAI - Inclusion of Arrival Date in Air Manifest - 54293					-> [PMTLAI] - US54293 - Inclusion of Arrival Date in Air Manifest
-
 eTrade - PMTLAI - Modification of Air Manifest Rules - 54522						-> [PMTLAI] - US54522 - Modification of Air Manifest Rules
 eTrade - PMTLAI - Modification of Sea Manifest Rules - 54523						-> [PMTLAI] - US54523 - Modification of Sea Manifest Rules		
 				
-eTrade - POPS - Fetching of Status Updates from PTOPS DB (Import Permit) - 53878		
+
+													
+eTrade - PMTLAI - Tag as Final - 54294									-> [PMTLAI] - US 54294 - Tag as Final
 
 
 
-
+eTrade - POPS - Fetching of Status Updates from PTOPS DB (Import Permit) - 53878			-> [POPS] - US53878 - Fetching of Status Updates from PTOPS DB (Import Permit)
 
 
 
 TABLE MANIPULATIONS
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-10/17/2024 - Add column arrival_Daate in etrade2live.air_manifest 
+54293- 10/17/2024 - Add column arrival_Daate in etrade2live.air_manifest 
+
+
+
+ROLES
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+54294 - 05/28/2024 Created a Role for Finalizing the manifest for Air and Sea = ROLE_FINALIZE_MANIFEST

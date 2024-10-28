@@ -1,0 +1,56 @@
+[POPS] - US53878 - Fetching of Status Updates from PTOPS DB (Import Permit)
+=====================================================================================================================================
+eTrade - POPS - Fetching of Status Updates from PTOPS DB (Import Permit) - 53878
+
+
+
+C:\Code Programs\work-work\etrade\etrade-data-bridge\etrade-data-bridge>
+-------------------------------------------------------------------------------------------------------------------------------------
+As the: eTrade System
+
+I should be able to:
+
+Fetch the updated details from the PTOPS DB and update them in our Import Permit transaction using the Import Permit Number.
+The details that should be looked into in the txn_import_permit table should be as follows:
+
+	Valid_until_date - Valid until date 				= valid_until_date
+	Import_permit_number - Import Permit Number			= ip_no
+	Status - Status							= status
+	Zone_manager_remarks - Reason for  Disapproval			= permit_apps.remarks
+	Date_approved - Approval Date					= approval_date
+	Date_rejected - Date Disapproved				= date_disapproved
+✓	Date_paid -			
+	Date_used - date used						= date_used
+	Date_delivered - date delivered					= date_delivered
+	Date_cancelled - date cancelled					= date_cancelled
+	Processing_fee - processing fee					= processing_fee
+	Payment {
+		Official_receipt_date - official receipt date
+		Official_receipt_number - official receipt number
+✓		Reference_number - Payment Ref No.
+✓		Amount
+		}
+
+So that:
+
+Our Import Permit transactions will be updated based on the status updates being made on the PTOPS side.
+-------------------------------------------------------------------------------------------------------------------------------------
+
+Valid_until_date - Valid until date 				= valid_until_date
+Import_permit_number - Import Permit Number			= ip_no
+Status - Status							= status
+Zone_manager_remarks - Reason for  Disapproval
+Date_approved - Approval Date					= approval_date
+Date_rejected - Date Disapproved				= date_disapproved
+Date_paid -			
+Date_used - date used						= date_used
+Date_delivered - date delivered					= date_delivered
+Date_cancelled - date cancelled					= date_cancelled
+Processing_fee - processing fee					= processing_fee
+Payment {
+	Official_receipt_date - official receipt date
+	Official_receipt_number - official receipt number
+	Reference_number - Payment Ref No.
+	Amount
+	}
+
