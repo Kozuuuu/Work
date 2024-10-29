@@ -5,21 +5,24 @@ eTrade - GTSB - Additional GTSB Rulings - 54144								-> [GTSB] - US54144 - Add
 eTrade - PMTLAI - Inclusion of Arrival Date in Air Manifest - 54293					-> [PMTLAI] - US54293 - Inclusion of Arrival Date in Air Manifest
 eTrade - PMTLAI - Modification of Air Manifest Rules - 54522						-> [PMTLAI] - US54522 - Modification of Air Manifest Rules
 eTrade - PMTLAI - Modification of Sea Manifest Rules - 54523						-> [PMTLAI] - US54523 - Modification of Sea Manifest Rules		
+
+eTrade - PMTLAI - Tag as Final - 54294									-> [PMTLAI] - US 54294 - Tag as Final
 				
 
+eTrade: Add date and time stamps for Air/Airline Manifest monitoring - 55114 				-> [PMTLAI] - US55114 - Add date and time stamps for Air/Airline Manifest monitoring
+
+
+
 													
-eTrade - PMTLAI - Tag as Final - 54294									-> [PMTLAI] - US 54294 - Tag as Final
-
-
-
 eTrade - POPS - Fetching of Status Updates from PTOPS DB (Import Permit) - 53878			-> [POPS] - US53878 - Fetching of Status Updates from PTOPS DB (Import Permit)
+
 
 
 
 TABLE MANIPULATIONS
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-54293- 10/17/2024 - Add column arrival_Daate in etrade2live.air_manifest 
-
+54293 - 10/17/2024 - Add column arrival_Daate in etrade2live.air_manifest 				-> ALTER TABLE etrade2live.air_manifest ADD COLUMN arrival_date DATE;
+55114 - 10/19/2024 - Add column urn in etrade2live.airline						-> ALTER TABLE etrade2live.airline ADD COLUMN urn VARCHAR(5) AFTER country_ID;
 
 
 ROLES
