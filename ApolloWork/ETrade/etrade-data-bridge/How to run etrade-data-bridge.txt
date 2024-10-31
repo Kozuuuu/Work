@@ -17,7 +17,7 @@ Pre-Requisite:
 	Pass: V@5pS3cR3t
  
 3. Create a dir under "etrade-data-bridge\src\main\resources\" called "graphql-client"
-	---- mkdir graphql-client
+	---- mkdir graphql-client						-> THIS IS IMPORTANAT!!! etrade-data-bridge WONT RUN WITHOUT THIS!!!
 
 4. mvn clean install and mvn sprin-boot:run
 	- make sure you are in the main directory

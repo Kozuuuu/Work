@@ -9,7 +9,7 @@ eTrade - PMTLAI - Modification of Sea Manifest Rules - 54523						-> [PMTLAI] - 
 eTrade - PMTLAI - Tag as Final - 54294									-> [PMTLAI] - US 54294 - Tag as Final
 				
 
-eTrade: Add date and time stamps for Air/Airline Manifest monitoring - 55114 				-> [PMTLAI] - US55114 - Add date and time stamps for Air/Airline Manifest monitoring
+eTrade - PMTLAI - Modification of Airlines Master List - 55114 						-> [PMTLAI] - US55114 - eTrade - PMTLAI - Modification of Airlines Master List
 
 
 
