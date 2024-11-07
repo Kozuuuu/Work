@@ -5,16 +5,21 @@ eTrade - GTSB - Additional GTSB Rulings - 54144								-> [GTSB] - US54144 - Add
 eTrade - PMTLAI - Inclusion of Arrival Date in Air Manifest - 54293					-> [PMTLAI] - US54293 - Inclusion of Arrival Date in Air Manifest
 eTrade - PMTLAI - Modification of Air Manifest Rules - 54522						-> [PMTLAI] - US54522 - Modification of Air Manifest Rules
 eTrade - PMTLAI - Modification of Sea Manifest Rules - 54523						-> [PMTLAI] - US54523 - Modification of Sea Manifest Rules		
-
 eTrade - PMTLAI - Tag as Final - 54294									-> [PMTLAI] - US 54294 - Tag as Final
-				
-
 eTrade - PMTLAI - Modification of Airlines Master List - 55114 						-> [PMTLAI] - US55114 - eTrade - PMTLAI - Modification of Airlines Master List
+eTrade - POPS - Retrieval of List of Countries from PTOPS DB - 55045					-> [POPS] - US55045 - etrade - Retrieval of List of Countries from PTOPS DB
 
+
+
+eTrade - POPS - Disabling of Transfer Permit Number Generation - 52846					-> [POPS] - US52846 - eTrade - POPS - Disabling of Transfer Permit Number Generation 
+
+eTrade - POPS -  Disabling of Import Permit Number Generation - 52842					-> [POPS] - US52842 - eTrade - POPS -  Disabling of Import Permit Number Generation
 
 
 													
 eTrade - POPS - Fetching of Status Updates from PTOPS DB (Import Permit) - 53878			-> [POPS] - US53878 - Fetching of Status Updates from PTOPS DB (Import Permit)
+
+
 
 
 
@@ -25,6 +30,6 @@ TABLE MANIPULATIONS
 55114 - 10/19/2024 - Add column urn in etrade2live.airline						-> ALTER TABLE etrade2live.airline ADD COLUMN urn VARCHAR(5) AFTER country_ID;
 
 
-ROLES
+ROLES CREATED
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 54294 - 05/28/2024 Created a Role for Finalizing the manifest for Air and Sea = ROLE_FINALIZE_MANIFEST

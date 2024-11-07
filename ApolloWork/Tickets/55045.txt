@@ -1,0 +1,26 @@
+[POPS] - US55045 - Retrieval of List of Countries from PTOPS DB 
+====================================================================================================================================================
+eTrade - POPS - Retrieval of List of Countries from PTOPS DB - 55045
+
+
+
+
+kozuu@LAPTOP-7EUI03CP:~/apollo-work/ETRADE-wip_pops/cdec-etrade-fe/etrade-2.0$ 
+C:\Code Programs\Apollo - work\etrade\etrade-data-bridge\etrade-data-bridge>
+----------------------------------------------------------------------------------------------------------------------------------------------------
+As the: eTrade System
+
+I should be able to:
+
+	Get/retrieve the List of Countries from the PTOPS DB.
+
+	Save or update the Countries in the port lookup table in the database.
+
+	The List of Countries is a reference for applying for Import Permits and PEZA Export Declaration.
+
+	The table that should be looked into is the following:
+		refs.ref_countries
+
+So that:
+
+The Countries' master list will be updated.
